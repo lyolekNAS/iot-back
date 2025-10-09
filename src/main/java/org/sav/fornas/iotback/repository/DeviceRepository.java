@@ -12,4 +12,7 @@ public interface DeviceRepository extends JpaRepository<Device, Integer> {
 
 	@Query("SELECT new org.sav.fornas.dto.iot.DeviceDto(d.id, d.name, d.lastUpdated, d.username, d.password) FROM Device d")
 	public List<DeviceDto> findAllDeviceDto();
+
+	@Query("SELECT new org.sav.fornas.dto.iot.DeviceDto(d.id, d.name, d.lastUpdated, d.username, d.password) FROM Device d Where d.id = :id")
+	public DeviceDto findBiIdDeviceDto(Integer id);
 }

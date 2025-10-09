@@ -1,5 +1,6 @@
 package org.sav.fornas.iotback.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,4 +24,9 @@ public class Device {
 
 	String username;
 	String password;
+
+	@ManyToOne
+	@JoinColumn(name = "place_id")
+	@JsonBackReference
+	Place state;
 }
