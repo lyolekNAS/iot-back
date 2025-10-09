@@ -2,7 +2,7 @@ package org.sav.fornas.iotback.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.sav.fornas.dto.iot.DeviceDto;
+import org.sav.fornas.dto.iot.DeviceView;
 import org.sav.fornas.iotback.repository.DeviceRepository;
 import org.springframework.stereotype.Service;
 
@@ -14,11 +14,11 @@ import java.util.List;
 public class DeviceService {
 	private final DeviceRepository deviceRepository;
 
-	public List<DeviceDto> getAll() {
-		return deviceRepository.findAllDeviceDto();
+	public List<DeviceView> getAll() {
+		return deviceRepository.findAllProjectedBy();
 	}
 
-	public DeviceDto getById(Integer id){
-		return deviceRepository.findBiIdDeviceDto(id);
+	public DeviceView getById(Integer id){
+		return deviceRepository.findProjectedById(id).orElseThrow(() -> new RuntimeException("Пристрій не знайдено"));
 	}
 }

@@ -2,7 +2,7 @@ package org.sav.fornas.iotback.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.sav.fornas.iotback.entity.Place;
+import org.sav.fornas.dto.iot.PlaceView;
 import org.sav.fornas.iotback.service.PlaceService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +18,7 @@ public class PlaceController {
 
 	private final PlaceService placeService;
 	@GetMapping("/all")
-	public List<Place> getAll(){
+	public List<PlaceView> getAll(){
 		log.debug(">>> getAll()");
 		return placeService.getAll();
 	}

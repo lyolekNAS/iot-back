@@ -1,18 +1,15 @@
 package org.sav.fornas.iotback.repository;
 
-import org.sav.fornas.dto.iot.DeviceDto;
+import org.sav.fornas.dto.iot.DeviceView;
 import org.sav.fornas.iotback.entity.Device;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface DeviceRepository extends JpaRepository<Device, Integer> {
 
+	public List<DeviceView> findAllProjectedBy();
 
-	@Query("SELECT new org.sav.fornas.dto.iot.DeviceDto(d.id, d.name, d.lastUpdated, d.username, d.password) FROM Device d")
-	public List<DeviceDto> findAllDeviceDto();
-
-	@Query("SELECT new org.sav.fornas.dto.iot.DeviceDto(d.id, d.name, d.lastUpdated, d.username, d.password) FROM Device d Where d.id = :id")
-	public DeviceDto findBiIdDeviceDto(Integer id);
+	public Optional<DeviceView> findProjectedById(Integer id);
 }
