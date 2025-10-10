@@ -21,8 +21,13 @@ public class Place {
 	String name;
 	String description;
 
-	@OneToMany(mappedBy = "state", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "place", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@ToString.Exclude
 	@JsonManagedReference
 	List<Device> devices;
+
+	@OneToMany(mappedBy = "place", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ToString.Exclude
+	@JsonManagedReference
+	private List<UserPlace> userPlaces;
 }

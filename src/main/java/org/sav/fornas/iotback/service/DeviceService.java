@@ -14,11 +14,7 @@ import java.util.List;
 public class DeviceService {
 	private final DeviceRepository deviceRepository;
 
-	public List<DeviceView> getAll() {
-		return deviceRepository.findAllProjectedBy();
-	}
-
-	public DeviceView getById(Integer id){
-		return deviceRepository.findProjectedById(id).orElseThrow(() -> new RuntimeException("Пристрій не знайдено"));
+	public DeviceView getById(Integer id, Long userId){
+		return deviceRepository.findProjectedByIdAndUserId(id, userId).orElseThrow(() -> new RuntimeException("Пристрій не знайдено"));
 	}
 }

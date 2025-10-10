@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.sav.fornas.dto.iot.PlaceView;
 import org.sav.fornas.iotback.repository.PlaceRepository;
+import org.sav.fornas.iotback.secrity.annotation.IsAdmin;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,7 +15,13 @@ import java.util.List;
 public class PlaceService {
 	private final PlaceRepository placeRepository;
 
+
+	@IsAdmin
 	public List<PlaceView> getAll() {
 		return placeRepository.findAllProjectedBy();
+	}
+
+	public List<PlaceView> getAllByUser(Long id) {
+		return placeRepository.findUserPlaces(id);
 	}
 }
