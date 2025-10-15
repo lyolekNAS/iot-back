@@ -1,12 +1,14 @@
 package org.sav.fornas.iotback.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Setter
@@ -29,4 +31,9 @@ public class Device {
 	@JoinColumn(name = "place_id")
 	@JsonBackReference
 	Place place;
+
+	@OneToMany(mappedBy = "device", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ToString.Exclude
+	@JsonManagedReference
+	List<DevicePorts> devicePorts;
 }

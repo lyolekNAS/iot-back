@@ -1,4 +1,4 @@
-package org.sav.fornas.iotback.secrity.annotation;
+package org.sav.fornas.iotback.security.annotation;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 
