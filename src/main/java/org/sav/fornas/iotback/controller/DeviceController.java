@@ -35,8 +35,8 @@ public class DeviceController {
 	}
 
 	@GetMapping("/port/{id}/history/{onDate}")
-	public List<PortHistoryView> getPortHistoty(@PathVariable Integer id, @PathVariable LocalDate onDate, @AuthenticationPrincipal Jwt jwt){
-		log.debug(">>> getPortHistoty({}, {})", id, onDate);
+	public List<PortHistoryView> getPortHistory(@PathVariable Integer id, @PathVariable LocalDate onDate, @AuthenticationPrincipal Jwt jwt){
+		log.debug(">>> getPortHistory({}, {})", id, onDate);
 		return deviceService.getPortHistory(id, onDate, jwt.getClaim(CLAIM_USER_ID));
 	}
 
