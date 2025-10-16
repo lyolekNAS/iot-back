@@ -3,11 +3,13 @@ package org.sav.fornas.iotback.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.sav.fornas.dto.iot.DeviceView;
+import org.sav.fornas.dto.iot.PortHistoryView;
 import org.sav.fornas.iotback.service.DeviceService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -31,4 +33,11 @@ public class DeviceController {
 		deviceService.updatePortValue(id, jwt.getClaim(CLAIM_USER_ID), value);
 		return true;
 	}
+
+	@GetMapping("/port/{id}/history/{onDate}")
+	public List<PortHistoryView> getPortHistoty(@PathVariable Integer id, @PathVariable LocalDate onDate, @AuthenticationPrincipal Jwt jwt){
+		log.debug(">>> getPortHistoty({}, {})", id, onDate);
+		return deviceService.getPortHistory(id, onDate, jwt.getClaim(CLAIM_USER_ID));
+	}
+
 }

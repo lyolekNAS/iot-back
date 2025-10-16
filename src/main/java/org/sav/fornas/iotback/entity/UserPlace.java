@@ -15,7 +15,7 @@ public class UserPlace {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long id;
 
-	private Integer userId;
+	Integer userId;
 
 	@ManyToOne
 	@JoinColumn(name = "place_id")
