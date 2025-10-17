@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -36,6 +37,8 @@ public class DeviceService {
 	}
 
 	public List<PortHistoryView> getPortHistory(Integer portId, LocalDate onDate, Long userId){
-		return portHistoryRepository.findAllByPortIdAndUserAndDate(portId, userId, onDate);
+		LocalDateTime dateStart = onDate.atStartOfDay();
+		LocalDateTime dateFin = dateStart.plusDays(1);
+		return portHistoryRepository.findAllByPortIdAndUserAndDate(portId, userId, dateStart, dateFin);
 	}
 }

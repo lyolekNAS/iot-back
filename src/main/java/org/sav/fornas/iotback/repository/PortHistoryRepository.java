@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface PortHistoryRepository extends JpaRepository<DevicePortsHistory, Integer> {
@@ -18,12 +18,14 @@ public interface PortHistoryRepository extends JpaRepository<DevicePortsHistory,
             JOIN d.place p
             JOIN p.userPlaces up
             WHERE dph.port.id = :portId
-                AND DATE(dph.onTime) = :date
+                AND dph.onTime >= :dateStart
+                AND dph.onTime < :dateFin
                 AND up.userId = :userId
     """)
 	List<PortHistoryView> findAllByPortIdAndUserAndDate(
 			@Param("portId") Integer portId,
 			@Param("userId") Long userId,
-			@Param("date") LocalDate date
+			@Param("dateStart") LocalDateTime dateStart,
+			@Param("dateFin") LocalDateTime dateFin
 	);
 }
