@@ -4,7 +4,7 @@ package org.sav.fornas.iotback.listener;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.sav.fornas.iotback.event.PortValueUpdatedEvent;
-import org.sav.fornas.iotback.service.DeviceCommandProducer;
+import org.sav.fornas.iotback.service.PortEventPublisher;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
@@ -14,15 +14,11 @@ import org.springframework.transaction.event.TransactionalEventListener;
 @RequiredArgsConstructor
 public class PortEventListener {
 
-	private final DeviceCommandProducer deviceCommandProducer;
+	private final PortEventPublisher portEventPublisher;
 
 	@TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
 	public void onPortValueUpdated(PortValueUpdatedEvent event) {
 		log.debug(">>> After commit: sending Kafka command for port {}", event.getPortId());
-		deviceCommandProducer.sendUpdatePortCommand(
-				event.getDeviceId(),
-				event.getPortId(),
-				event.getNewValue()
-		);
+		portEventPublisher.publish(event);
 	}
 }
