@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -28,15 +29,15 @@ public interface PortHistoryRepository extends JpaRepository<DevicePortsHistory,
 	List<PortHistoryView> findAllByPortIdAndUserAndDate(
 			@Param("portId") Integer portId,
 			@Param("userId") Long userId,
-			@Param("dateStart") LocalDateTime dateStart,
-			@Param("dateFin") LocalDateTime dateFin
+			@Param("dateStart") Instant dateStart,
+			@Param("dateFin") Instant dateFin
 	);
 
 	@Modifying
 	@Transactional
 	@Query(value = "CALL aggregate_port_history(:startDate, :endDate)", nativeQuery = true)
 	void aggregatePortHistory(
-			@Param("startDate") LocalDateTime startDate,
-			@Param("endDate") LocalDateTime endDate
+			@Param("startDate") Instant startDate,
+			@Param("endDate") Instant endDate
 	);
 }

@@ -14,8 +14,10 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Instant;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.List;
 
 @Service
@@ -47,8 +49,9 @@ public class DeviceService {
 	}
 
 	public List<PortHistoryView> getPortHistory(Integer portId, LocalDate onDate, Long userId){
-		LocalDateTime dateStart = onDate.atStartOfDay();
-		LocalDateTime dateFin = dateStart.plusDays(1);
+
+		Instant dateStart = onDate.atStartOfDay(ZoneId.systemDefault()).toInstant();
+		Instant dateFin = onDate.plusDays(1).atStartOfDay(ZoneId.systemDefault()).toInstant();
 		return portHistoryRepository.findAllByPortIdAndUserAndDate(portId, userId, dateStart, dateFin);
 	}
 }

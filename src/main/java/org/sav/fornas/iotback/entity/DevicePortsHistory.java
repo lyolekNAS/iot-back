@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 @Entity
 @Setter
@@ -18,7 +18,7 @@ public class DevicePortsHistory {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int id;
 
-	LocalDateTime onTime;
+	Instant onTime;
 	Double value;
 
 	@ManyToOne

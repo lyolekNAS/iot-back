@@ -6,8 +6,7 @@ import org.sav.fornas.iotback.repository.PortHistoryRepository;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.*;
 
 @Service
 @RequiredArgsConstructor
@@ -20,11 +19,13 @@ public class HistoryAggregationService {
 	public void aggregateYesterday() {
 		log.debug(">>> started");
 		LocalDate yesterday = LocalDate.now().minusDays(1);
-		LocalDateTime start = yesterday.atStartOfDay();
-		LocalDateTime end = yesterday.plusDays(1).atStartOfDay();
 
-		log.debug(">>> start: {} end: {}", start, end);
-		repository.aggregatePortHistory(start, end);
+
+		Instant dateStart = yesterday.atStartOfDay(ZoneId.systemDefault()).toInstant();
+		Instant dateFin = yesterday.plusDays(1).atStartOfDay(ZoneId.systemDefault()).toInstant();
+
+		log.debug(">>> start: {} end: {}", dateStart, dateFin);
+		repository.aggregatePortHistory(dateStart, dateFin);
 		log.debug(">>> finished");
 	}
 }
