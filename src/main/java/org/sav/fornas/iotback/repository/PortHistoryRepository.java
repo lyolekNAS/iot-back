@@ -1,6 +1,6 @@
 package org.sav.fornas.iotback.repository;
 
-import org.sav.fornas.dto.iot.PortHistoryView;
+import org.sav.fornas.iotback.dto.iot.PortHistoryView;
 import org.sav.fornas.iotback.entity.DevicePortsHistory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

@@ -2,8 +2,8 @@ package org.sav.fornas.iotback.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.sav.fornas.dto.iot.DeviceView;
-import org.sav.fornas.dto.iot.PortHistoryView;
+import org.sav.fornas.iotback.dto.iot.DeviceView;
+import org.sav.fornas.iotback.dto.iot.PortHistoryView;
 import org.sav.fornas.iotback.service.DeviceService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;

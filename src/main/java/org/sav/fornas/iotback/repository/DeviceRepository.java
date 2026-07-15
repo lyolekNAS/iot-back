@@ -1,6 +1,6 @@
 package org.sav.fornas.iotback.repository;
 
-import org.sav.fornas.dto.iot.DeviceView;
+import org.sav.fornas.iotback.dto.iot.DeviceView;
 import org.sav.fornas.iotback.entity.Device;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

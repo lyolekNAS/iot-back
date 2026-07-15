@@ -2,7 +2,7 @@ package org.sav.fornas.iotback.service;
 
 
 import lombok.extern.slf4j.Slf4j;
-import org.sav.fornas.dto.iot.DeviceCommand;
+import org.sav.fornas.iotback.dto.iot.DeviceCommand;
 import org.sav.fornas.iotback.event.PortValueUpdatedEvent;
 import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Service;

@@ -2,7 +2,7 @@ package org.sav.fornas.iotback.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.sav.fornas.dto.iot.PlaceView;
+import org.sav.fornas.iotback.dto.iot.PlaceView;
 import org.sav.fornas.iotback.security.annotation.IsAdmin;
 import org.sav.fornas.iotback.service.PlaceService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
