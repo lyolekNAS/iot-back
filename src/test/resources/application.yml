@@ -1,0 +1,16 @@
+logging:
+    level:
+        org.sav: INFO
+
+spring:
+    config:
+        import:
+            - optional:configserver:${config.server.url}
+    cloud:
+        vault:
+            enabled: false
+    security:
+        oauth2:
+            resourceserver:
+                jwt:
+                    issuer-uri: none
