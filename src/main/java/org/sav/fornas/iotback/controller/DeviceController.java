@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.sav.fornas.iotback.dto.iot.DeviceView;
 import org.sav.fornas.iotback.dto.iot.PortHistoryView;
+import org.sav.fornas.iotback.dto.iot.PortScheduleUpdateRequest;
 import org.sav.fornas.iotback.service.DeviceService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
@@ -31,6 +32,13 @@ public class DeviceController {
 	public boolean updatePort(@PathVariable Integer id, @PathVariable Double value, @AuthenticationPrincipal Jwt jwt){
 		log.debug(">>> updatePort({}, {})", id, value);
 		deviceService.updatePortValue(id, jwt.getClaim(CLAIM_USER_ID), value);
+		return true;
+	}
+
+	@PostMapping({"/port/{id}/schedule"})
+	public boolean updateSchedule(@PathVariable Integer id, @RequestBody PortScheduleUpdateRequest request, @AuthenticationPrincipal Jwt jwt){
+		log.debug(">>> updateSchedule({}, {})", id, request);
+		deviceService.updatePortSchedule(id, jwt.getClaim(CLAIM_USER_ID), request);
 		return true;
 	}
 

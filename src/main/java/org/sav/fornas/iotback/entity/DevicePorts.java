@@ -1,10 +1,13 @@
 package org.sav.fornas.iotback.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.util.List;
 
 @Entity
 @Setter
@@ -25,4 +28,9 @@ public class DevicePorts {
 	@JoinColumn(name = "device_id")
 	@JsonBackReference
 	Device device;
+
+	@OneToMany(mappedBy = "port", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	@ToString.Exclude
+	@JsonManagedReference
+	List<DevicePortsScheduler> schedulers;
 }
